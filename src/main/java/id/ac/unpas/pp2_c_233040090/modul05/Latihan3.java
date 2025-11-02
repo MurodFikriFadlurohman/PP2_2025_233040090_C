@@ -13,7 +13,7 @@ public class Latihan3 {
                 frame.setLayout(new FlowLayout());
 
                 JLabel label = new JLabel("Modul 3 gaiss");
-                JButton button = new JButton("KLIK");
+                JButton button = new JButton("KLIK SAYA!");
                 button.addActionListener(e -> {
                     label.setText("Aku adalah wowo");
                 });
