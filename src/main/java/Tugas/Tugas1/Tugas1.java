@@ -1,4 +1,4 @@
-package Tugas;
+package Tugas.Tugas1;
 
 import java.awt.BorderLayout;
 import javax.swing.JButton;
