@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ManajemenNilaiSiswaApp03 extends JFrame {
+public class ManajemenNilaiSiswaApp04 extends JFrame {
     private JTextField txtNama;
     private JTextField txtNilai;
     private JComboBox<String> cmbMatkul;
@@ -15,7 +15,7 @@ public class ManajemenNilaiSiswaApp03 extends JFrame {
     private JTabbedPane tabbedPane;
 
     private JPanel createInputpanel() {
-        JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10));
+        JPanel panel = new JPanel(new GridLayout(5, 2, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // Komponen Nama
@@ -23,7 +23,7 @@ public class ManajemenNilaiSiswaApp03 extends JFrame {
         txtNama = new JTextField();
         panel.add(txtNama);
 
-        // Komponen Mata Pelajaran (ComboBox)
+        // Komponen Mata Pelajaran
         panel.add(new JLabel("Mata Pelajaran: "));
         String[] matkul = {"Matematika Dasar", "Bahasa Indonesia",
                 "Algoritma dan Pemrograman I", "Praktikum Pemrograman II"};
@@ -31,22 +31,42 @@ public class ManajemenNilaiSiswaApp03 extends JFrame {
         panel.add(cmbMatkul);
 
         // Komponen Nilai
-        panel.add(new JLabel("Nilai (0-100: "));
+        panel.add(new JLabel("Nilai (0-100): "));
         txtNilai = new JTextField();
         panel.add(txtNilai);
 
         // Tombol Simpan
         JButton btnSimpan = new JButton("Simpan Data");
-        panel.add(new JLabel("")); // Placeholder kosong agar tombol di kanan
+        panel.add(new JLabel(""));
         panel.add(btnSimpan);
 
-        // Event Handling Tombol Simpan
+        // Tombol Reset (Event Handling)
+        JButton btnReset = new JButton("Reset");
+        panel.add(new JLabel(""));
+        panel.add(btnReset);
+
+        // Tambahkan tombol ke panel
+        panel.add(btnSimpan);
+        panel.add(btnReset);
+
+        // Event tombol simpan
         btnSimpan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 prosesSimpan();
             }
         });
+
+        // Event tombol reset (menghapus input)
+        btnReset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtNama.setText("");
+                txtNilai.setText("");
+                cmbMatkul.setSelectedIndex(0);
+            }
+        });
+
         return panel;
     }
 
@@ -121,6 +141,13 @@ public class ManajemenNilaiSiswaApp03 extends JFrame {
             return;
         }
 
+        // Validasi Tambahan : Cek apakah nilai kosong
+        if (strNilai.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nilai tidak boleh kosong!",
+                    "Error Validasi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         // Validasi 2: Cek apakah nilai berupa angka dan dalam range valid
         int nilai;
         try {
@@ -176,7 +203,7 @@ public class ManajemenNilaiSiswaApp03 extends JFrame {
         tabbedPane.setSelectedIndex(1); // Otomatis pindah ke tab tabel
     }
 
-    public ManajemenNilaiSiswaApp03(){
+    public ManajemenNilaiSiswaApp04(){
         // 1. Konfigurasi Frame Utama
         setTitle("Aplikasi Manajemen Nilai Siswa");
         setSize(500, 400);
@@ -200,7 +227,7 @@ public class ManajemenNilaiSiswaApp03 extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new ManajemenNilaiSiswaApp03().setVisible(true);
+            new ManajemenNilaiSiswaApp04().setVisible(true);
         });
     }
 }
