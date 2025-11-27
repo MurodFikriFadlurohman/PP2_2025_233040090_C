@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ManajemenNilaiSiswaApp02 extends JFrame {
+public class ManajemenNilaiSiswaApp03 extends JFrame {
     private JTextField txtNama;
     private JTextField txtNilai;
     private JComboBox<String> cmbMatkul;
@@ -90,7 +90,7 @@ public class ManajemenNilaiSiswaApp02 extends JFrame {
         });
         return panel;
     }
-    
+
     // Logika Validasi dan Penyimpanan Data
     private void prosesSimpan() {
         // 1. Ambil data dari input
@@ -105,6 +105,20 @@ public class ManajemenNilaiSiswaApp02 extends JFrame {
             JOptionPane.showMessageDialog(this, "Nama Siswa tidak boleh kosong",
                     "Error Validasi", JOptionPane.ERROR_MESSAGE);
             return; // Hentikan Proses
+        }
+
+        // Tugas 3: Minimal 3 karakter
+        if (nama.trim().length() < 3) {
+            JOptionPane.showMessageDialog(this, "Nama minimal harus 3 karakter!",
+                    "Error Validasi", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Tugas 3: Hanya boleh huruf dan spasi
+        if (!nama.matches("[a-zA-Z ]+")) {
+            JOptionPane.showMessageDialog(this, "Nama hanya boleh berisi huruf dan spasi!",
+                    "Error Validasi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         // Validasi 2: Cek apakah nilai berupa angka dan dalam range valid
@@ -162,7 +176,7 @@ public class ManajemenNilaiSiswaApp02 extends JFrame {
         tabbedPane.setSelectedIndex(1); // Otomatis pindah ke tab tabel
     }
 
-    public ManajemenNilaiSiswaApp02(){
+    public ManajemenNilaiSiswaApp03(){
         // 1. Konfigurasi Frame Utama
         setTitle("Aplikasi Manajemen Nilai Siswa");
         setSize(500, 400);
@@ -186,7 +200,7 @@ public class ManajemenNilaiSiswaApp02 extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new ManajemenNilaiSiswaApp02().setVisible(true);
+            new ManajemenNilaiSiswaApp03().setVisible(true);
         });
     }
 }

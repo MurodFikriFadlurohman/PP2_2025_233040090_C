@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ManajemenNilaiSiswaApp01 extends JFrame {
+public class ManajemenNilaiSiswaApp02 extends JFrame {
     private JTextField txtNama;
     private JTextField txtNilai;
     private JComboBox<String> cmbMatkul;
@@ -62,6 +62,32 @@ public class ManajemenNilaiSiswaApp01 extends JFrame {
         // Membungkus tabel dengan ScrollPane (agar bisa di scroll jika data banyak)
         JScrollPane scrollPane = new JScrollPane(tableData);
         panel.add(scrollPane, BorderLayout.CENTER);
+
+        // Tugas 2: Panel tombol hapus
+        JPanel panelBawah = new JPanel(new  FlowLayout(FlowLayout.RIGHT)){};
+        JButton btnHapus = new JButton("Hapus Data");
+        panelBawah.add(btnHapus);
+        panel.add(panelBawah, BorderLayout.SOUTH);
+
+        // Event tombol hapus
+        btnHapus.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int indeks = tableData.getSelectedRow();
+                if (indeks > -1) {
+                    // Tampilkan dialog konfirmasi
+                    int konfirmasi = JOptionPane.showConfirmDialog(null, "Apakah Anda Yakin?", "Hapus Data", JOptionPane.YES_NO_OPTION);
+
+                    // Hanya hapus JIKA user menekan YES
+                    if (konfirmasi == JOptionPane.YES_OPTION) {
+                        tableModel.removeRow(indeks);
+                    }
+                    // Jika user pilih NO atau Close, tidak terjadi apa-apa
+                } else {
+                    JOptionPane.showMessageDialog(null, "Silakan pilih baris yang ingin dihapus.");
+                }
+            }
+        });
         return panel;
     }
 
@@ -136,7 +162,7 @@ public class ManajemenNilaiSiswaApp01 extends JFrame {
         tabbedPane.setSelectedIndex(1); // Otomatis pindah ke tab tabel
     }
 
-    public ManajemenNilaiSiswaApp01(){
+    public ManajemenNilaiSiswaApp02(){
         // 1. Konfigurasi Frame Utama
         setTitle("Aplikasi Manajemen Nilai Siswa");
         setSize(500, 400);
@@ -160,7 +186,7 @@ public class ManajemenNilaiSiswaApp01 extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new ManajemenNilaiSiswaApp01().setVisible(true);
+            new ManajemenNilaiSiswaApp02().setVisible(true);
         });
     }
 }

@@ -1,4 +1,4 @@
-package id.ac.unpas.pp2_c_233040090.modul07;
+package Tugas.Tugas3;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ManajemenNilaiSiswaApp extends JFrame {
+public class ManajemenNilaiSiswaApp01 extends JFrame {
     private JTextField txtNama;
     private JTextField txtNilai;
     private JComboBox<String> cmbMatkul;
@@ -98,13 +98,30 @@ public class ManajemenNilaiSiswaApp extends JFrame {
 
         // 3. Logika Bisnis (Menentukan Grade)
         String grade;
-        if (nilai >= 80) grade = "A";
-        else if (nilai >= 70) grade = "AB";
-        else if (nilai >= 60) grade = "B";
-        else if (nilai >= 50) grade = "BC";
-        else if (nilai >= 40) grade = "C";
-        else if (nilai >= 30) grade = "D";
-        else grade = "E";
+        Integer nilaiObjek = Integer.valueOf(nilai); // Ubah int primitif menjadi Integer objek
+
+        grade = switch (nilaiObjek) {
+            // Grade A: Rentang 80 sampai 100
+            case Integer i when (i >= 80) -> "A";
+
+            // Grade AB: Rentang 70 sampai 79
+            case Integer i when (i >= 70) -> "AB";
+
+            // Grade B: Rentang 60 sampai 69
+            case Integer i when (i >= 60) -> "B";
+
+            // Grade BC: Rentang 50 sampai 59
+            case Integer i when (i >= 50) -> "BC";
+
+            // Grade C: Rentang 40 sampai 49
+            case Integer i when (i >= 40) -> "C";
+
+            // Grade D: Rentang 30 sampai 39
+            case Integer i when (i >= 30) -> "D";
+
+            // Grade E: Untuk nilai di bawah 30
+            default -> "E";
+        };
 
         // 4. Masukkan ke tabel (Update Model)
         Object[] dataBaris = {nama, matkul, nilai, grade};
@@ -119,7 +136,7 @@ public class ManajemenNilaiSiswaApp extends JFrame {
         tabbedPane.setSelectedIndex(1); // Otomatis pindah ke tab tabel
     }
 
-    public ManajemenNilaiSiswaApp(){
+    public ManajemenNilaiSiswaApp01(){
         // 1. Konfigurasi Frame Utama
         setTitle("Aplikasi Manajemen Nilai Siswa");
         setSize(500, 400);
@@ -143,7 +160,7 @@ public class ManajemenNilaiSiswaApp extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new ManajemenNilaiSiswaApp().setVisible(true);
+            new ManajemenNilaiSiswaApp01().setVisible(true);
         });
     }
 }
